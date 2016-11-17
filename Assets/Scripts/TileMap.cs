@@ -29,4 +29,8 @@ public class TileMap : MonoBehaviour {
 		f.Close();
 	}
 
+	public bool IsValid(Vector3 position){
+		return (position.x >= 0) && (position.y >= 0) &&
+			(position.x < mapWidth) && (position.y < mapHeight);
+	}
 }

@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\Blink.cs" />
+     <Compile Include="Assets\Scripts\CameraFollow.cs" />
      <Compile Include="Assets\Scripts\InputGridMove.cs" />
      <Compile Include="Assets\Scripts\TileMap.cs" />
  <Reference Include="UnityEngine.UI">

@@ -4,12 +4,18 @@ using System.Collections;
 public class InputGridMove : MonoBehaviour {
 	private float stepTime = 0.25f, nextStep;
 	private TileMap map;
+	private GameController gc;
+
 	void Start(){
 		nextStep = Time.time;
 		map = GameObject.FindObjectOfType<TileMap>();
+		gc = GameObject.FindObjectOfType<GameController>();
 	}
 
 	void Update(){
+		if(Input.GetKeyDown(KeyCode.Space))
+			gc.EndTurn();
+
 		int x = 0, y = 0;
 
 		if(Time.time >= nextStep){

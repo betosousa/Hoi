@@ -9,6 +9,7 @@ public class TileMap : MonoBehaviour {
 
 	private string fileName = "tileMap.txt";
 
+	[SerializeField] private GameObject[] marks;
 	[SerializeField] private GameObject[] tilePrefabs;
 	[SerializeField] private int mapWidth = 16, mapHeight = 10;
 
@@ -27,6 +28,11 @@ public class TileMap : MonoBehaviour {
 			}
 		
 		f.Close();
+
+		GetComponent<GameController>().InitPlayers(
+			Instantiate(marks[0], Vector3.zero, Quaternion.identity) as GameObject,
+			Instantiate(marks[1], new Vector3(mapWidth-1, mapHeight-1, 0), Quaternion.identity) as GameObject
+		);
 	}
 
 	public bool IsValid(Vector3 position){

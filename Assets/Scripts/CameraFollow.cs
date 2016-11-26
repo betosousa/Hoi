@@ -9,11 +9,15 @@ public class CameraFollow : MonoBehaviour {
 	Vector3 offset;
 
 	void Start () {
-		player = GameObject.FindWithTag("Mark").GetComponent<Transform>();
-		offset = transform.position - player.position;
+		offset = transform.position - Vector3.zero;
 	}
 	
 	void Update () {
-		transform.position = Vector3.Lerp(transform.position, player.position + offset, t);
+		if(player != null)
+			transform.position = Vector3.Lerp(transform.position, player.position + offset, t);
+	}
+
+	public void SetTarget(Transform target){
+		player = target;
 	}
 }

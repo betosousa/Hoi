@@ -47,8 +47,8 @@ Temporary Items
 .apdisk
 
 # meu primeiro ignore xD
-/[Ll]ibrary/
-/[Tt]emp/
+Library/
+Temp/
 /[Oo]bj/
 /[Bb]uild/
 /[Bb]uilds/

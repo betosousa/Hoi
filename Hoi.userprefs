@@ -1,9 +1,9 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\TileMap.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Horse.cs">
     <Files>
-      <File FileName="Assets\Scripts\TileMap.cs" Line="28" Column="3" />
-      <File FileName="..\..\pacman\Assets\scripts\map\MapGenerator.cs" Line="32" Column="3" />
+      <File FileName="Assets\Scripts\Attributes.cs" Line="6" Column="19" />
+      <File FileName="Assets\Scripts\Horse.cs" Line="16" Column="15" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

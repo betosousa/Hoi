@@ -5,7 +5,7 @@ public class InputGridMove : MonoBehaviour {
 	private float stepTime = 0.25f, nextStep;
 	private TileMap map;
 	private GameController gc;
-
+	private Color rangeColor;
 	void Start(){
 		nextStep = Time.time;
 		map = GameObject.FindObjectOfType<TileMap>();
@@ -32,5 +32,12 @@ public class InputGridMove : MonoBehaviour {
 
 		if(map.IsValid(newPosition))
 			transform.position = newPosition;
+
+		if(Input.GetKeyDown(KeyCode.R)){
+			map.DrawRange(transform.position, 10);
+		}
+		if(Input.GetKeyDown(KeyCode.U)){
+			map.UnDrawRange(transform.position, 10);
+		}
 	}
 }

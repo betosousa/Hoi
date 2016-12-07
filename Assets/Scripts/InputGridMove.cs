@@ -6,10 +6,15 @@ public class InputGridMove : MonoBehaviour {
 	private TileMap map;
 	private GameController gc;
 	private Color rangeColor;
+
+	private bool rangeDrawed;
+
 	void Start(){
 		nextStep = Time.time;
 		map = GameObject.FindObjectOfType<TileMap>();
 		gc = GameObject.FindObjectOfType<GameController>();
+
+		rangeDrawed = false;
 	}
 
 	void Update(){
@@ -33,11 +38,13 @@ public class InputGridMove : MonoBehaviour {
 		if(map.IsValid(newPosition))
 			transform.position = newPosition;
 
-		if(Input.GetKeyDown(KeyCode.R)){
+		if(Input.GetKeyDown(KeyCode.R) && !rangeDrawed){
 			map.DrawRange(transform.position, 10);
+			rangeDrawed = true;
 		}
 		if(Input.GetKeyDown(KeyCode.U)){
 			map.UnDrawRange(transform.position, 10);
+			rangeDrawed = false;
 		}
 	}
 }

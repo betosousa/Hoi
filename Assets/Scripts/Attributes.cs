@@ -10,7 +10,10 @@ public class Attributes : MonoBehaviour{
 	public int range;
 	public int intelligence;
 	public float speed;
+	public float health;
 	public Animator anim;
+
+	public string className;
 
 	// Use this for initialization
 	void Start () {

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class HealthClass : Attributes
+public class HealthClass : Unit
 {
 	// Use this for initialization
 	void Start ()

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SkilledClass : Attributes
+public class SkilledClass : Unit
 {
 	// Use this for initialization
 	void Start ()

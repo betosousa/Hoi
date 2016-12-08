@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Horse : Attributes
+public class Horse : Unit
 {
 
 	// Use this for initialization

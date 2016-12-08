@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class DefenseClass : Attributes
+public class DefenseClass : Unit
 {
 	// Use this for initialization
 	void Start ()

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class FastClass : Attributes
+public class FastClass : Unit
 {
 	// Use this for initialization
 	void Start ()

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ResClass : Attributes
+public class ResClass : Unit
 {
 	// Use this for initialization
 	void Start ()

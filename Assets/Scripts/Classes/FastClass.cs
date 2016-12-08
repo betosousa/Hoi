@@ -1,20 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Horse : Unit
+public class FastClass : Unit
 {
-
 	// Use this for initialization
 	void Start ()
 	{
-		speed = 2;
 		level = 1;
-		strength = 6;
-		resistence = 8;
-		intelligence = 8;
-		range = 5;
+		health = 8;
+		strength = 10;
 		defense = 5;
+		intelligence = 10;
+		resistence = 5;
+		speed = 15;
+		range = 10;
 		anim = GetComponent<Animator> ();
 	}
 }
-

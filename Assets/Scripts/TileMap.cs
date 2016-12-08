@@ -6,6 +6,7 @@ public class TileMap : MonoBehaviour {
 
 	private byte[,] map;
 	private MeshRenderer[,] tilesMap;
+	private bool[,] unitsMap;
 
 	private string fileName = "tileMap.txt";
 
@@ -15,18 +16,18 @@ public class TileMap : MonoBehaviour {
 	[SerializeField] private Material[] materials;
 	[SerializeField] private int mapWidth = 16, mapHeight = 10;
 
-	enum Tiles : byte{ land=0, forrest, mountain, water}	
+	enum Tiles : byte{ land=0, forrest, mountain, water, tower}	
 
 
 	void Awake(){
-		
 		StreamReader f = new StreamReader(fileName);
 
 		mapWidth  = int.Parse(f.ReadLine());
 		mapHeight = int.Parse(f.ReadLine());
 
 		map = new byte[mapWidth, mapHeight];
-		tilesMap  = new MeshRenderer[mapWidth, mapHeight];
+		tilesMap = new MeshRenderer[mapWidth, mapHeight];
+		unitsMap = new bool[mapWidth, mapHeight];
 
 		for(int j = mapHeight-1; j >= 0; j--){
 			for (int i = 0; i < mapWidth; i++){
@@ -69,6 +70,9 @@ public class TileMap : MonoBehaviour {
 		case "Mountain":
 			material = materials[(int) Tiles.mountain];
 			break;
+		case "Tower":
+			material = materials[(int) Tiles.tower];
+			break;
 		}
 			
 		return material;
@@ -94,4 +98,17 @@ public class TileMap : MonoBehaviour {
 					tilesMap[i,j].material = GetMaterial(tilesMap[i,j].tag);
 				}
 	}
+
+	public void LockPosition(Vector3 position){
+		unitsMap[(int)position.x, (int)position.y] = true;
+	}
+
+	public void UnLockPosition(Vector3 position){
+		unitsMap[(int)position.x, (int)position.y] = false;
+	}
+
+	public bool IsLockedPosition(Vector3 position){
+		return unitsMap[(int)position.x, (int)position.y];
+	}
+
 }

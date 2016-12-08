@@ -6,16 +6,38 @@ public class GameController : MonoBehaviour {
 	CameraFollow cam;
 	Transform[] players;
 	int targetIndex = 0;
-	Text infoText;
+	public Text infoText, coinsText;
 	const string NEW_TURN = "New turn for ";
 	const float WAIT_TIME = 1.5f;
 
+	// evento de alguem clicar no botao 'end turn'
+	public delegate void EndTurnAction();
+	public static event EndTurnAction OnEndTurn;
+
+	// Cria um botao pra passar o turno
+	void OnGUI(){
+		Rect sizeAndPosition = new Rect( Screen.width/2 - 50 , Screen.height-25, 100, 20);
+		string buttonName = "End Turn";
+		bool buttonClicked = GUI.Button(sizeAndPosition, buttonName);
+
+		if(buttonClicked){
+			if(OnEndTurn != null)
+				OnEndTurn();
+		}
+	}
+
+
 	void Start () {
 		cam = Camera.main.GetComponent<CameraFollow>();
-		infoText = GameObject.FindObjectOfType<Text>();
+
+		// quando alguem clicar no 'end turn' chama 'ChangePlayer'
+		OnEndTurn += ChangePlayer;
+
 		if(players != null){
 			ChangePlayer();
 		}
+
+
 	}
 
 	public void InitPlayers(GameObject m1, GameObject m2){
@@ -30,8 +52,9 @@ public class GameController : MonoBehaviour {
 		players[targetIndex].gameObject.SetActive(true);
 		cam.SetTarget(players[targetIndex]);
 
-
-		StartCoroutine("InfoText", NEW_TURN + players[targetIndex].GetComponent<Mark>().lado);
+		Mark mark = players[targetIndex].GetComponent<Mark>();
+		mark.SetCoinsText(coinsText);
+		StartCoroutine("InfoText", NEW_TURN + mark.lado);
 	}
 
 	IEnumerator InfoText(string text){
@@ -40,7 +63,5 @@ public class GameController : MonoBehaviour {
 		infoText.text = "";
 	}
 
-	public void EndTurn(){
-		ChangePlayer();
-	}
+
 }

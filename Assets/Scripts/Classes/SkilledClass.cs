@@ -1,20 +1,29 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Horse : Unit
+public class SkilledClass : Unit
 {
-
 	// Use this for initialization
 	void Start ()
 	{
-		speed = 2;
 		level = 1;
-		strength = 6;
-		resistence = 8;
-		intelligence = 8;
+		health = 10;
+		strength = 5;
+		defense = 8;
+		intelligence = 15;
+		resistence = 12;
+		speed = 10;
 		range = 5;
-		defense = 5;
 		anim = GetComponent<Animator> ();
 	}
 }
 
+/*
+	15
+	12
+	10
+	10
+	8
+	5
+	5
+*/

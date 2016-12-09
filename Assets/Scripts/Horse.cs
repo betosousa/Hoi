@@ -14,7 +14,6 @@ public class Horse : Unit
 		intelligence = 8;
 		range = 5;
 		defense = 5;
-		anim = GetComponent<Animator> ();
 	}
 }
 

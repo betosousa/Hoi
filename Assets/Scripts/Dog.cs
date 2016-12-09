@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Dog : Attributes {
+public class Dog : Unit {
 
 	// Use this for initialization
 	void Start () {
@@ -12,6 +12,5 @@ public class Dog : Attributes {
 		intelligence = 8;
 		range = 5;
 		defense = 5;
-		anim = GetComponent<Animator> ();
 	}
 }

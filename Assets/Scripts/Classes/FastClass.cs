@@ -14,6 +14,5 @@ public class FastClass : Unit
 		resistence = 5;
 		speed = 15;
 		range = 10;
-		anim = GetComponent<Animator> ();
 	}
 }

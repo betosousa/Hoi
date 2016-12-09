@@ -14,7 +14,6 @@ public class StrongClass : Unit
 		resistence = 8;
 		speed = 10;
 		range = 5;
-		anim = GetComponent<Animator> ();
 	}
 }
 

@@ -30,12 +30,7 @@ public class Tower : MonoBehaviour {
 
 
 	public void OnTriggerEnter(Collider other){
-<<<<<<< HEAD
-		Mark mark = other.GetComponent<Mark>();
-		if(mark != null){
-			mark.OnSelectUnit += OpenShop;
-			m = mark;
-=======
+
 		if(m == null){
 			Unit unit = other.GetComponent<Unit>();
 			if(unit != null){
@@ -48,7 +43,6 @@ public class Tower : MonoBehaviour {
 				if(m.lado.Equals(mark.lado))
 					mark.OnSelectUnit += OpenShop;
 			}
->>>>>>> a60b2bf2df95dbcd51c54ae15373d8663b9ad120
 		}
 
 	}

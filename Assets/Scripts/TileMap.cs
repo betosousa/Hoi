@@ -11,7 +11,7 @@ public class TileMap : MonoBehaviour {
 
 	private string fileName = "tileMap.txt";
 
-	[SerializeField] private Color rangeColor, noColor;
+	[SerializeField] private Color rangeColor, noColor, atkColor;
 	[SerializeField] private GameObject[] marks;
 	[SerializeField] private GameObject[] tilePrefabs;
 	[SerializeField] private Material[] materials;
@@ -69,37 +69,14 @@ public class TileMap : MonoBehaviour {
 		return x>=0 && y>=0 && x<map.GetLength(0) && y<map.GetLength(1);
 	}
 
-	Material GetMaterial(string tag){
-		Material material = null;
 
-		switch(tag){
-		case "Forrest":
-			material = materials[(int) Tiles.forrest];
-			break;
-		case "Land":
-			material = materials[(int) Tiles.land];
-			break;
-		case "Water":
-			material = materials[(int) Tiles.water];
-			break;
-		case "Mountain":
-			material = materials[(int) Tiles.mountain];
-			break;
-		case "Tower":
-			material = materials[(int) Tiles.tower];
-			break;
-		}
-			
-		return material;
-	}
-
-	public void DrawRange(Vector3 position, int range, Color rangeColor){
+	public void DrawRange(Vector3 position, int range, bool isAtk){
 		int x = (int) position.x, y = (int) position.y;
 
 		for(int i = x-range; i <= x+range; i++)
 			for(int j = y - range + Mathf.Abs(x-i); j <= y + range - Mathf.Abs(x-i); j++)
 				if(IsInMap(i,j)){
-					tilesMap[i,j].color = rangeColor;
+					tilesMap[i,j].color = isAtk? atkColor :rangeColor ;
 				}
 	}
 

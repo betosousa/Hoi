@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class Mark : MonoBehaviour {
+
 	private int coins = 20;
 
 	public List<Unit> unidades;
@@ -11,7 +12,7 @@ public class Mark : MonoBehaviour {
 
 	public Text coinText;
 	private static string COINS = "Coins: ";
-
+	
 	public delegate void SelectEventHandler();
 	public delegate void MoveEventHandler(Vector3 position);
 	public event SelectEventHandler OnSelectUnit;
@@ -58,13 +59,15 @@ public class Mark : MonoBehaviour {
 	}
 
 	void Update(){
-		if(Input.GetKeyDown(KeyCode.R)){
-			if(OnSelectUnit!=null)
+		if(Input.GetKeyDown(KeyCode.X)){
+			if(OnSelectUnit!=null){
 				OnSelectUnit();
+			}
 		}
-		if(Input.GetKeyDown(KeyCode.U)){
-			if(OnTileSelect!=null)
+		if(Input.GetKeyDown(KeyCode.C)){
+			if(OnTileSelect!=null){
 				OnTileSelect(transform.position);
+			}
 		}
 	}
 

@@ -30,6 +30,10 @@ public class Tower : MonoBehaviour {
 
 
 	public void OnTriggerEnter(Collider other){
+<<<<<<< HEAD
+=======
+
+>>>>>>> 28bcf1bf3931d3b7ae6b6d09798416d8a9e7050b
 		if(m == null){
 			Unit unit = other.GetComponent<Unit>();
 			if(unit != null){

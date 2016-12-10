@@ -61,10 +61,10 @@ public class Unit : MonoBehaviour{
 
 	void SelectedUnit(){
 		if (!hasEnemy ()) {
-			map.DrawRange (transform.position, range, Color.yellow);
+			map.DrawRange (transform.position, range, false);
 			mark.OnTileSelect += MovePosition;
 		} else {
-			map.DrawRange (transform.position, rangeAtk, Color.red);
+			map.DrawRange (transform.position, rangeAtk, true);
 			mark.OnTileSelect += attack;
 		}
 	}
@@ -92,7 +92,7 @@ public class Unit : MonoBehaviour{
 			if (enemy != null ) {
 				// verifica se não estão do mesmo lado
 				if ( !enemy.mark.lado.Equals (mark.lado) ) {
-					map.DrawRange (transform.position, rangeAtk,Color.red);
+					map.DrawRange (transform.position, rangeAtk, true);
 					return true;
 				}
 			}
@@ -146,7 +146,7 @@ public class Unit : MonoBehaviour{
 			mark.OnTileSelect -= MovePosition;
 			//desenhar range de ataque
 			if (hasEnemy()) {
-				map.DrawRange (transform.position, rangeAtk, Color.red);
+				map.DrawRange (transform.position, rangeAtk, true);
 				mark.OnTileSelect += attack;
 			}
 

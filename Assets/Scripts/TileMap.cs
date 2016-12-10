@@ -78,7 +78,7 @@ public class TileMap : MonoBehaviour {
 		return material;
 	}
 
-	public void DrawRange(Vector3 position, int range){
+	public void DrawRange(Vector3 position, int range, Color rangeColor){
 		int x = (int) position.x, y = (int) position.y;
 
 		for(int i = x-range; i <= x+range; i++)

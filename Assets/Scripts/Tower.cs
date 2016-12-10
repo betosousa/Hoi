@@ -20,7 +20,6 @@ public class Tower : MonoBehaviour {
 		if(mark != null){
 			mark.OnSelectUnit += OpenShop;
 			m = mark;
-			Debug.Log ("qualquer coisa ai");
 		}
 	}
 

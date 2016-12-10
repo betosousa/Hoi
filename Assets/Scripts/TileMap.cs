@@ -16,10 +16,12 @@ public class TileMap : MonoBehaviour {
 	[SerializeField] private Material[] materials;
 	[SerializeField] private int mapWidth = 16, mapHeight = 10;
 
-	enum Tiles : byte{ land=0, forrest, mountain, water, tower}	
+	enum Tiles : byte{ land=0, forrest, mountain, water, tower }	
 
 
 	void Awake(){
+
+
 		StreamReader f = new StreamReader(fileName);
 
 		mapWidth  = int.Parse(f.ReadLine());
@@ -29,20 +31,32 @@ public class TileMap : MonoBehaviour {
 		tilesMap = new MeshRenderer[mapWidth, mapHeight];
 		unitsMap = new bool[mapWidth, mapHeight];
 
+		GameObject[] players = new GameObject[2];
+
+		players[0] = Instantiate(marks[0], Vector3.zero, Quaternion.identity) as GameObject;
+		players[1] = Instantiate(marks[1], new Vector3(mapWidth-1, mapHeight-1, 0), Quaternion.identity) as GameObject;
+
+		GetComponent<GameController>().InitPlayers(players[0], players[1]);
+
 		for(int j = mapHeight-1; j >= 0; j--){
 			for (int i = 0; i < mapWidth; i++){
-				map[i,j] = (byte)(f.Read() - '0');
-				tilesMap[i, j] = (Instantiate(tilePrefabs[map[i,j]], new Vector3(i,j,0),Quaternion.identity) as GameObject).GetComponent<MeshRenderer>();
+				byte t =  (byte)(f.Read() - '0');
+				if(t > 4){
+					map[i,j] = (byte) Tiles.tower;
+					GameObject tower = (Instantiate(tilePrefabs[map[i,j]], new Vector3(i,j,0),Quaternion.identity) as GameObject); 
+					tower.GetComponent<Tower>().m = players[t-5].GetComponent<Mark>();
+					tilesMap[i, j] = tower.GetComponent<MeshRenderer>();
+				}else{
+					map[i,j] = t;
+					tilesMap[i, j] = (Instantiate(tilePrefabs[map[i,j]], new Vector3(i,j,0),Quaternion.identity) as GameObject).GetComponent<MeshRenderer>();
+				}
+
 			}
 			f.ReadLine();// pula o '\n'
 		}
 		
 		f.Close();
 
-		GetComponent<GameController>().InitPlayers(
-			Instantiate(marks[0], Vector3.zero, Quaternion.identity) as GameObject,
-			Instantiate(marks[1], new Vector3(mapWidth-1, mapHeight-1, 0), Quaternion.identity) as GameObject
-		);
 	}
 
 	public bool IsValid(Vector3 position){

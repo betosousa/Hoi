@@ -6,7 +6,7 @@ public class Tower : MonoBehaviour {
 	float buttonWidth = 50, buttonHeight = 50, offset = 30;
 	bool selected = false;
 	Vector3 spawnPosition = new Vector3(0,0,-0.3f);
-	Mark m;
+	public Mark m;
 
 	[SerializeField] private Unit[] unitsPrefabs;
 	[SerializeField] private Texture[] unitsImgs;
@@ -15,13 +15,21 @@ public class Tower : MonoBehaviour {
 		GameController.OnEndTurn += CloseShop;
 	}
 
+
 	public void OnTriggerEnter(Collider other){
-		Mark mark = other.GetComponent<Mark>();
-		if(mark != null){
-			mark.OnSelectUnit += OpenShop;
-			m = mark;
-			Debug.Log ("qualquer coisa ai");
+		if(m == null){
+			Unit unit = other.GetComponent<Unit>();
+			if(unit != null){
+				m = unit.mark;
+			}
+		}else{
+			Mark mark = other.GetComponent<Mark>();
+			if(m != null && (mark!=null)){
+				if(m.lado.Equals(mark.lado))
+					mark.OnSelectUnit += OpenShop;
+			}
 		}
+
 	}
 
 	public void OnTriggerExit(Collider other){

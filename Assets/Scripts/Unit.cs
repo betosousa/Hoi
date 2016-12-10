@@ -4,14 +4,25 @@ using System.Collections;
 public class Unit : MonoBehaviour{
 
 	public int price = 1;
+
 	public int level;
+
+	// atk e def
 	public int strength;
-	public int resistence;
 	public int defense;
+
+	// ranges de movimentacao e atk
 	public int range;
 	public int rangeAtk;
+
+	// modificador de ataque
 	public int intelligence;
-	public float speed;
+
+	// modificador de defesa
+	public int resistence;
+
+	// ajuda a desviar
+	public int speed;
 	public float health;
 
 	public string className;

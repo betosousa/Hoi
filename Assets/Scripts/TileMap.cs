@@ -1,16 +1,17 @@
 ﻿using System.IO;
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class TileMap : MonoBehaviour {
 
 	private byte[,] map;
-	private MeshRenderer[,] tilesMap;
+	private Image[,] tilesMap;
 	private bool[,] unitsMap;
 
 	private string fileName = "tileMap.txt";
 
-	[SerializeField] private Color rangeColor;
+	[SerializeField] private Color rangeColor, noColor;
 	[SerializeField] private GameObject[] marks;
 	[SerializeField] private GameObject[] tilePrefabs;
 	[SerializeField] private Material[] materials;
@@ -28,7 +29,7 @@ public class TileMap : MonoBehaviour {
 		mapHeight = int.Parse(f.ReadLine());
 
 		map = new byte[mapWidth, mapHeight];
-		tilesMap = new MeshRenderer[mapWidth, mapHeight];
+		tilesMap = new Image[mapWidth, mapHeight];
 		unitsMap = new bool[mapWidth, mapHeight];
 
 		GameObject[] players = new GameObject[2];
@@ -45,10 +46,10 @@ public class TileMap : MonoBehaviour {
 					map[i,j] = (byte) Tiles.tower;
 					GameObject tower = (Instantiate(tilePrefabs[map[i,j]], new Vector3(i,j,0),Quaternion.identity) as GameObject); 
 					tower.GetComponent<Tower>().m = players[t-5].GetComponent<Mark>();
-					tilesMap[i, j] = tower.GetComponent<MeshRenderer>();
+					tilesMap[i, j] = tower.GetComponentsInChildren<Image>()[1];
 				}else{
 					map[i,j] = t;
-					tilesMap[i, j] = (Instantiate(tilePrefabs[map[i,j]], new Vector3(i,j,0),Quaternion.identity) as GameObject).GetComponent<MeshRenderer>();
+					tilesMap[i, j] = (Instantiate(tilePrefabs[map[i,j]], new Vector3(i,j,0),Quaternion.identity) as GameObject).GetComponentInChildren<Image>();
 				}
 
 			}
@@ -98,7 +99,7 @@ public class TileMap : MonoBehaviour {
 		for(int i = x-range; i <= x+range; i++)
 			for(int j = y - range + Mathf.Abs(x-i); j <= y + range - Mathf.Abs(x-i); j++)
 				if(IsInMap(i,j)){
-					tilesMap[i,j].material.color = rangeColor;
+					tilesMap[i,j].color = rangeColor;
 				}
 	}
 
@@ -113,7 +114,7 @@ public class TileMap : MonoBehaviour {
 		for(int i = x-range; i <= x+range; i++)
 			for(int j = y - range + Mathf.Abs(x-i); j <= y + range - Mathf.Abs(x-i); j++)
 				if(IsInMap(i,j)){
-					tilesMap[i,j].material = GetMaterial(tilesMap[i,j].tag);
+					tilesMap[i,j].color = noColor;
 				}
 	}
 

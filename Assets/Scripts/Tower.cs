@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class Tower : MonoBehaviour {
@@ -8,12 +9,24 @@ public class Tower : MonoBehaviour {
 	Vector3 spawnPosition = new Vector3(0,0,-0.3f);
 	public Mark m;
 
+	Image image;
+
 	[SerializeField] private Unit[] unitsPrefabs;
 	[SerializeField] private Texture[] unitsImgs;
 
 	void Start(){
 		GameController.OnEndTurn += CloseShop;
+		image = GetComponentsInChildren<Image>()[0];
+		if(m != null){
+			SetImageColor();
+		}
+			
 	}
+
+	void SetImageColor(){
+		image.color = m.lado.Equals("Dragon")? Color.red : Color.blue;
+	}
+		
 
 
 	public void OnTriggerEnter(Collider other){
@@ -27,6 +40,7 @@ public class Tower : MonoBehaviour {
 			Unit unit = other.GetComponent<Unit>();
 			if(unit != null){
 				m = unit.mark;
+				SetImageColor();
 			}
 		}else{
 			Mark mark = other.GetComponent<Mark>();
@@ -81,3 +95,4 @@ public class Tower : MonoBehaviour {
 	}
 		
 }
+

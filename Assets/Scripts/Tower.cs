@@ -30,17 +30,12 @@ public class Tower : MonoBehaviour {
 
 
 	public void OnTriggerEnter(Collider other){
-<<<<<<< HEAD
-=======
-
->>>>>>> 28bcf1bf3931d3b7ae6b6d09798416d8a9e7050b
-		if(m == null){
-			Unit unit = other.GetComponent<Unit>();
-			if(unit != null){
-				m = unit.mark;
-				SetImageColor();
-			}
-		}else{
+		Unit unit = other.GetComponent<Unit>();
+		if(unit != null){
+			m = unit.mark;
+			SetImageColor();
+		}
+		if(m != null){
 			Mark mark = other.GetComponent<Mark>();
 			if(m != null && (mark!=null)){
 				if(m.lado.Equals(mark.lado))

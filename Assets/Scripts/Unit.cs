@@ -80,6 +80,17 @@ public class Unit : MonoBehaviour{
 			
 	}
 
+	public int contragolpe(Unit enemy)
+	{
+		if ( Random.Range(0,100) >= enemy.speed + enemy.speed-speed ) {
+			
+			return dano (enemy) / 2;
+		} else {
+			return 0;
+		}
+
+	}
+
 	bool hasEnemy()
 	{
 		Collider[] hitCollider = Physics.OverlapSphere (transform.position, rangeAtk);
@@ -111,9 +122,12 @@ public class Unit : MonoBehaviour{
 				// verifica se não estão do mesmo lado
 				if ( !enemy.mark.lado.Equals (mark.lado) ) {
 					enemy.health -= dano (enemy);
+					int contra = contragolpe (enemy);
+					health -= contra;
 					Debug.Log ( "atacou " );
 					Debug.Log ( dano (enemy) );
-
+					Debug.Log ( "contragolpe " );
+					Debug.Log ( contra );
 
 				}
 			}
@@ -129,10 +143,7 @@ public class Unit : MonoBehaviour{
 		}
 	}
 
-	void contragolpe()
-	{
-		
-	}
+
 
 
 	void MovePosition(Vector3 position){

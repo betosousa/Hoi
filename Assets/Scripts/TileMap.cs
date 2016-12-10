@@ -88,6 +88,10 @@ public class TileMap : MonoBehaviour {
 				}
 	}
 
+	public bool IsInRange(Vector3 unitPosition, Vector3 tilePosition, int range){
+		int dx = (int) Mathf.Abs(unitPosition.x - tilePosition.x), dy = (int) Mathf.Abs(unitPosition.y - tilePosition.y);
+		return (dx+dy) <= range;
+	}
 
 	public void UnDrawRange(Vector3 position, int range){
 		int x = (int) position.x, y = (int) position.y;

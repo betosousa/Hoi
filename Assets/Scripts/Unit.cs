@@ -53,7 +53,7 @@ public class Unit : MonoBehaviour{
 	}
 
 	void MovePosition(Vector3 position){
-		if(!map.IsLockedPosition(position)){
+		if(!map.IsLockedPosition(position) && map.IsInRange(transform.position, position, range)){
 			map.UnLockPosition(transform.position);
 			map.UnDrawRange(transform.position, range);
 			position.z = zOffset;

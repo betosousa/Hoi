@@ -14,6 +14,8 @@ public class SkilledClass : Unit
 		resistence = 12;
 		speed = 10;
 		range = 5;
+		price = 3;
+		rangeAtk = 3;
 	}
 }
 

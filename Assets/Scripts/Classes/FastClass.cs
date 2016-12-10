@@ -14,5 +14,7 @@ public class FastClass : Unit
 		resistence = 5;
 		speed = 15;
 		range = 10;
+		price = 1;
+		rangeAtk = 2;
 	}
 }

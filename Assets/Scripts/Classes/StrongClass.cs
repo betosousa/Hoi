@@ -14,6 +14,8 @@ public class StrongClass : Unit
 		resistence = 8;
 		speed = 10;
 		range = 5;
+		price = 2;
+		rangeAtk = 1;
 	}
 }
 

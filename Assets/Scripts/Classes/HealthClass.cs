@@ -14,5 +14,7 @@ public class HealthClass : Unit
 		resistence = 10;
 		speed = 5;
 		range = 5;
+		price = 2;
+		rangeAtk = 2;
 	}
 }

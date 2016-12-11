@@ -16,8 +16,9 @@ public class GameController : MonoBehaviour {
 
 	// Cria um botao pra passar o turno
 	void OnGUI(){
-		Rect sizeAndPosition = new Rect( Screen.width/2 - 50 , Screen.height-25, 100, 20);
-		string buttonName = "End Turn";
+		Mark mark = players[targetIndex].GetComponent<Mark>();
+		Rect sizeAndPosition = new Rect( Screen.width/2 - 50 , Screen.height-25, 120, 20);
+		string buttonName = "End " + mark.lado + "'s Turn";
 		bool buttonClicked = GUI.Button(sizeAndPosition, buttonName);
 
 		if(buttonClicked){

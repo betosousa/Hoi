@@ -14,7 +14,6 @@ public class TileMap : MonoBehaviour {
 	[SerializeField] private Color rangeColor, noColor, atkColor;
 	[SerializeField] private GameObject[] marks;
 	[SerializeField] private GameObject[] tilePrefabs;
-	[SerializeField] private Material[] materials;
 	[SerializeField] private int mapWidth = 16, mapHeight = 10;
 
 	enum Tiles : byte{ land=0, forrest, mountain, water, tower }	

@@ -15,7 +15,7 @@ public class Mark : MonoBehaviour {
 	
 	public delegate void SelectEventHandler();
 	public delegate void MoveEventHandler(Vector3 position);
-	public event SelectEventHandler OnSelectUnit;
+	public event SelectEventHandler OnTowerSelect;
 	public event MoveEventHandler OnTileSelect;
 
 	void Start(){
@@ -52,19 +52,30 @@ public class Mark : MonoBehaviour {
 
 	void OnEnable(){
 		SetUnitsBools(false);	
+		GameController.OnEndTurn += EndTurn;
 	}
 
 	void OnDisable(){
 		SetUnitsBools(true);
+		GameController.OnEndTurn -= EndTurn;
+	}
+
+	void EndTurn(){
+		if(OnTowerSelect != null){
+			OnTowerSelect = null;
+		}
+		if(OnTileSelect != null){
+			OnTileSelect = null;
+		}
 	}
 
 	void Update(){
-		if(Input.GetKeyDown(KeyCode.X)){
-			if(OnSelectUnit!=null){
-				OnSelectUnit();
+		if(Input.GetKeyDown(KeyCode.C)){
+			if(OnTowerSelect!=null){
+				OnTowerSelect();
 			}
 		}
-		if(Input.GetKeyDown(KeyCode.C)){
+		if(Input.GetKeyDown(KeyCode.X)){
 			if(OnTileSelect!=null){
 				OnTileSelect(transform.position);
 			}

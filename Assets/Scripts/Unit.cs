@@ -39,13 +39,24 @@ public class Unit : MonoBehaviour{
 
 	void Awake() {
 		map = GameObject.FindObjectOfType<TileMap>();
+		GameController.OnEndTurn += EndTurn;
 	}
+
+	public void Die(){
+		GameController.OnEndTurn -= EndTurn;
+		Destroy(gameObject);
+	}
+
+	void EndTurn(){
+		map.UnDrawRange(transform.position, range);
+	}
+
 
 	public void OnTriggerEnter(Collider other){
 		Mark m = other.GetComponent<Mark>();
 		if(m != null){
 			if(!havePlayed){
-				mark.OnSelectUnit += SelectedUnit;
+				mark.OnTileSelect += SelectedUnit;
 			}
 		}
 	}
@@ -54,22 +65,22 @@ public class Unit : MonoBehaviour{
 		Mark m = other.GetComponent<Mark>();
 		if(m != null){
 			if(!havePlayed){
-				mark.OnSelectUnit-=SelectedUnit;
+				mark.OnTileSelect -= SelectedUnit;
 			}
 		}
 	}
 
-	void SelectedUnit(){
-		if (!hasEnemy ()) {
+	void SelectedUnit(Vector3 position){
+		//if (!HasEnemy ()) {
 			map.DrawRange (transform.position, range, false);
 			mark.OnTileSelect += MovePosition;
-		} else {
-			map.DrawRange (transform.position, rangeAtk, true);
-			mark.OnTileSelect += attack;
-		}
+		//} else {
+		//	map.DrawRange (transform.position, rangeAtk, true);
+		//	mark.OnTileSelect += Attack;
+		//}
 	}
 
-	public int dano(Unit enemy)
+	public int Dano(Unit enemy)
 	{
 		if (strength > enemy.defense) {
 			return (strength - enemy.defense);
@@ -80,18 +91,18 @@ public class Unit : MonoBehaviour{
 			
 	}
 
-	public int contragolpe(Unit enemy)
+	public int Contragolpe(Unit enemy)
 	{
-		if ( Random.Range(0,100) >= enemy.speed + enemy.speed-speed ) {
+		if ( Random.Range(0,100) >= enemy.speed + (enemy.speed - speed) ) {
 			
-			return dano (enemy) / 2;
+			return Dano (enemy) / 2;
 		} else {
 			return 0;
 		}
 
 	}
 
-	bool hasEnemy()
+	bool HasEnemy()
 	{
 		Collider[] hitCollider = Physics.OverlapSphere (transform.position, rangeAtk);
 		int i=0;
@@ -112,7 +123,7 @@ public class Unit : MonoBehaviour{
 		return false;
 	}
 
-	void attack(Vector3 pos)
+	void Attack(Vector3 pos)
 	{
 		RaycastHit hit;
 		Ray ray = new Ray (pos, Vector3.back);
@@ -121,33 +132,35 @@ public class Unit : MonoBehaviour{
 			if (enemy != null ) {
 				// verifica se não estão do mesmo lado
 				if ( !enemy.mark.lado.Equals (mark.lado) ) {
-					enemy.health -= dano (enemy);
-					int contra = contragolpe (enemy);
+					enemy.health -= Dano (enemy);
+					int contra = Contragolpe (enemy);
 					health -= contra;
 					Debug.Log ( "atacou " );
-					Debug.Log ( dano (enemy) );
+					Debug.Log ( Dano (enemy) );
 					Debug.Log ( "contragolpe " );
 					Debug.Log ( contra );
 
+					// Verifica se morreu
+					if (enemy.health <= 0) {
+						enemy.Die();
+					}
 				}
 			}
-			mark.OnTileSelect -= attack;
+			mark.OnTileSelect -= Attack;
 			//desdesenhar range
 			havePlayed = true;
 			map.UnDrawRange(transform.position, rangeAtk);
-			// Verifica se morreu
-			if (enemy.health <= 0) {
-				Destroy (enemy.gameObject);
-			}
 
 		}
 	}
 
-
-
+	bool SamePosition (Vector3 pos){
+		return (pos.x == transform.position.x) && (pos.y == transform.position.y); // o z deles eh diferente
+	}
 
 	void MovePosition(Vector3 position){
-		if(!map.IsLockedPosition(position) && map.IsInRange(transform.position, position, range)){
+		if((!map.IsLockedPosition(position) && map.IsInRange(transform.position, position, range))// nova posicao livre na range
+			|| SamePosition(position)){ // nao se moveu
 			map.UnLockPosition(transform.position);
 			map.UnDrawRange(transform.position, range);
 			position.z = zOffset;
@@ -156,9 +169,9 @@ public class Unit : MonoBehaviour{
 			havePlayed = true;
 			mark.OnTileSelect -= MovePosition;
 			//desenhar range de ataque
-			if (hasEnemy()) {
+			if (HasEnemy()) {
 				map.DrawRange (transform.position, rangeAtk, true);
-				mark.OnTileSelect += attack;
+				mark.OnTileSelect += Attack;
 			}
 
 		}

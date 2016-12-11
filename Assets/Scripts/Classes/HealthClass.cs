@@ -3,8 +3,7 @@ using System.Collections;
 
 public class HealthClass : Unit
 {
-	// Use this for initialization
-	void Start ()
+	protected override void SetAttributes ()
 	{
 		level = 1;
 		health = 20;

@@ -79,7 +79,7 @@ public class Tower : MonoBehaviour {
 					}
 					if(m.GetCoins() >= unitsPrefabs[i].price){
 						Unit unit = (Instantiate(unitsPrefabs[i].gameObject, transform.position + spawnPosition, Quaternion.identity) as GameObject).GetComponent<Unit>();
-						unit.mark = m;
+						unit.InitUnit(m);
 						m.TakeCoins(unit.price);
 						m.unidades.Add(unit);
 					}

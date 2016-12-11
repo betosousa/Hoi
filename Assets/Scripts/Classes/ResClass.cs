@@ -3,8 +3,7 @@ using System.Collections;
 
 public class ResClass : Unit
 {
-	// Use this for initialization
-	void Start ()
+	protected override void SetAttributes ()
 	{
 		level = 1;
 		health = 12;
@@ -13,7 +12,7 @@ public class ResClass : Unit
 		intelligence = 8;
 		resistence = 15;
 		speed = 5;
-		range = 5;
+		range = 25;
 		price = 1;
 		rangeAtk = 2;
 	}

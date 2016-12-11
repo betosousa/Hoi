@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class Unit : MonoBehaviour{
@@ -35,11 +36,25 @@ public class Unit : MonoBehaviour{
 	TileMap map;
 	public Mark mark;
 	public bool havePlayed = false;
-
+	private Slider heathBar;
+	private Image barFill;
 
 	void Awake() {
 		map = GameObject.FindObjectOfType<TileMap>();
 		GameController.OnEndTurn += EndTurn;
+
+
+	}
+
+	protected void SetSlider(){
+		heathBar = GetComponentInChildren<Slider>();
+		heathBar.maxValue = health;
+
+		Image[] imgs = GetComponentsInChildren<Image>();
+		barFill = (imgs[0].name == "Fill") ? imgs[0] : imgs[1];
+		barFill.color = mark.lado.Equals("Dragon")? Color.red : Color.blue;
+
+		UpdateHealthBar();
 	}
 
 	public void Die(){
@@ -51,6 +66,22 @@ public class Unit : MonoBehaviour{
 		map.UnDrawRange(transform.position, range);
 	}
 
+	protected virtual void SetAttributes(){}
+
+	public void InitUnit(Mark m){
+		mark = m;
+		SetAttributes();
+		SetSlider();
+	}
+
+	void UpdateHealthBar(){
+		heathBar.value = health;
+	}
+
+	public void TakeDamage(float amount){
+		health -= amount;
+		UpdateHealthBar();
+	}
 
 	public void OnTriggerEnter(Collider other){
 		Mark m = other.GetComponent<Mark>();
@@ -132,9 +163,9 @@ public class Unit : MonoBehaviour{
 			if (enemy != null ) {
 				// verifica se não estão do mesmo lado
 				if ( !enemy.mark.lado.Equals (mark.lado) ) {
-					enemy.health -= Dano (enemy);
+					enemy.TakeDamage( Dano (enemy));
 					int contra = Contragolpe (enemy);
-					health -= contra;
+					TakeDamage(contra);
 					Debug.Log ( "atacou " );
 					Debug.Log ( Dano (enemy) );
 					Debug.Log ( "contragolpe " );
@@ -177,3 +208,4 @@ public class Unit : MonoBehaviour{
 		}
 	}
 }
+

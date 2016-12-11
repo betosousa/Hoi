@@ -45,7 +45,7 @@ public class Mark : MonoBehaviour {
 	void SetUnitsBools(bool havePlayed){
 		if(unidades != null){
 			foreach(Unit unit in unidades){
-				unit.havePlayed = havePlayed;
+				unit.haveMoved = havePlayed;
 			}
 		}
 	}

@@ -1,13 +1,15 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
 	CameraFollow cam;
 	Transform[] players;
-	int targetIndex = 0;
+	int targetIndex = 0, towerCount, dragonTowers, snakeTowers;
+
 	public Text infoText, coinsText;
-	const string NEW_TURN = "New turn for ";
+	const string NEW_TURN = "New turn for ", WINS = " WINS!";
 	const float WAIT_TIME = 1.5f;
 
 	// evento de alguem clicar no botao 'end turn'
@@ -64,5 +66,39 @@ public class GameController : MonoBehaviour {
 		infoText.text = "";
 	}
 
+	IEnumerator EndGameText(string text){
+		infoText.text = text;
+		yield return new WaitForSeconds(2 * WAIT_TIME);
+		infoText.text = "";
+		SceneManager.LoadScene("intro");
+	}
+
+
+	public void SetTowers(int count){
+		towerCount = count;
+		dragonTowers = 1;
+		snakeTowers = 1;
+	}
+
+	void Win(string side){
+		StartCoroutine("EndGameText", side + WINS);
+	}
+
+
+	public void ChangeScore(string oldSide, string newSide){
+		if(newSide.Equals("Dragon")){
+			dragonTowers++;
+			if(oldSide != null)
+				snakeTowers--;
+		}else{
+			snakeTowers++;
+			if(oldSide != null)
+				dragonTowers--;
+		}
+		if(dragonTowers >= towerCount || snakeTowers >= towerCount){
+			Win(newSide);
+		}
+			
+	}
 
 }

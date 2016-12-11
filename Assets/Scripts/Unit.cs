@@ -35,15 +35,13 @@ public class Unit : MonoBehaviour{
 
 	TileMap map;
 	public Mark mark;
-	public bool havePlayed = false;
+	public bool haveMoved = false;
 	private Slider heathBar;
 	private Image barFill;
 
 	void Awake() {
 		map = GameObject.FindObjectOfType<TileMap>();
 		GameController.OnEndTurn += EndTurn;
-
-
 	}
 
 	protected void SetSlider(){
@@ -86,7 +84,7 @@ public class Unit : MonoBehaviour{
 	public void OnTriggerEnter(Collider other){
 		Mark m = other.GetComponent<Mark>();
 		if(m != null){
-			if(!havePlayed){
+			if(!haveMoved){
 				mark.OnTileSelect += SelectedUnit;
 			}
 		}
@@ -95,20 +93,17 @@ public class Unit : MonoBehaviour{
 	public void OnTriggerExit(Collider other){
 		Mark m = other.GetComponent<Mark>();
 		if(m != null){
-			if(!havePlayed){
+			if(!haveMoved){
 				mark.OnTileSelect -= SelectedUnit;
 			}
 		}
 	}
 
 	void SelectedUnit(Vector3 position){
-		//if (!HasEnemy ()) {
+		if(!haveMoved){
 			map.DrawRange (transform.position, range, false);
 			mark.OnTileSelect += MovePosition;
-		//} else {
-		//	map.DrawRange (transform.position, rangeAtk, true);
-		//	mark.OnTileSelect += Attack;
-		//}
+		}
 	}
 
 	public int Dano(Unit enemy)
@@ -179,7 +174,7 @@ public class Unit : MonoBehaviour{
 			}
 			mark.OnTileSelect -= Attack;
 			//desdesenhar range
-			havePlayed = true;
+			haveMoved = true;
 			map.UnDrawRange(transform.position, rangeAtk);
 
 		}
@@ -197,7 +192,7 @@ public class Unit : MonoBehaviour{
 			position.z = zOffset;
 			transform.position = position;
 			map.LockPosition(transform.position);
-			havePlayed = true;
+			haveMoved = true;
 			mark.OnTileSelect -= MovePosition;
 			//desenhar range de ataque
 			if (HasEnemy()) {

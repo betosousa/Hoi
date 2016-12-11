@@ -34,7 +34,11 @@ public class TileMap : MonoBehaviour {
 		players[0] = Instantiate(marks[0], Vector3.zero, Quaternion.identity) as GameObject;
 		players[1] = Instantiate(marks[1], new Vector3(mapWidth-1, mapHeight-1, 0), Quaternion.identity) as GameObject;
 
-		GetComponent<GameController>().InitPlayers(players[0], players[1]);
+		GameController gc = GetComponent<GameController>();
+
+		gc.InitPlayers(players[0], players[1]);
+
+		int towerCount = 0;
 
 		for(int j = mapHeight-1; j >= 0; j--){
 			for (int i = 0; i < mapWidth; i++){
@@ -46,7 +50,7 @@ public class TileMap : MonoBehaviour {
 						tower.GetComponent<Tower>().m = players[t-5].GetComponent<Mark>();
 					Image[] imgs = tower.GetComponentsInChildren<Image>();
 					tilesMap[i, j] = (imgs[0].name == "Image") ? imgs[0] : imgs[1]; 
-
+					towerCount++;
 				}else{
 					map[i,j] = t;
 					tilesMap[i, j] = (Instantiate(tilePrefabs[map[i,j]], new Vector3(i,j,0),Quaternion.identity) as GameObject).GetComponentInChildren<Image>();
@@ -57,7 +61,7 @@ public class TileMap : MonoBehaviour {
 		}
 		
 		f.Close();
-
+		gc.SetTowers(towerCount);
 	}
 
 	public bool IsValid(Vector3 position){

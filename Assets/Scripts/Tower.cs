@@ -10,6 +10,7 @@ public class Tower : MonoBehaviour {
 	public Mark m;
 
 	Image image;
+	GameController gc;
 
 	[SerializeField] private Unit[] unitsPrefabs;
 	[SerializeField] private Texture[] unitsImgs;
@@ -19,7 +20,7 @@ public class Tower : MonoBehaviour {
 		Image[] imgs = GetComponentsInChildren<Image>();
 		image = (imgs[0].name == "taken") ? imgs[0] : imgs[1]; 
 		SetImageColor();
-			
+		gc = GameObject.FindObjectOfType<GameController>();		
 	}
 
 	void SetImageColor(){
@@ -35,8 +36,14 @@ public class Tower : MonoBehaviour {
 	public void OnTriggerEnter(Collider other){
 		Unit unit = other.GetComponent<Unit>();
 		if(unit != null){
+			string oldSide = null;
+			if(m != null){
+				oldSide = m.lado;
+			}
 			m = unit.mark;
 			SetImageColor();
+			if(!unit.mark.lado.Equals(oldSide))
+				gc.ChangeScore(oldSide, unit.mark.lado);
 		}
 		if(m != null){
 			Mark mark = other.GetComponent<Mark>();

@@ -16,15 +16,19 @@ public class Tower : MonoBehaviour {
 
 	void Start(){
 		GameController.OnEndTurn += CloseShop;
-		image = GetComponentsInChildren<Image>()[0];
-		if(m != null){
-			SetImageColor();
-		}
+		Image[] imgs = GetComponentsInChildren<Image>();
+		image = (imgs[0].name == "taken") ? imgs[0] : imgs[1]; 
+		SetImageColor();
 			
 	}
 
 	void SetImageColor(){
-		image.color = m.lado.Equals("Dragon")? Color.red : Color.blue;
+		if(m != null){	
+			image.color = m.lado.Equals("Dragon")? Color.red : Color.blue;
+		}else{
+			image.color = Color.white;
+		}
+			
 	}
 		
 

@@ -84,11 +84,21 @@ public class Tower : MonoBehaviour {
 							return;
 						}
 					}
-					if(m.GetCoins() >= unitsPrefabs[i].price){
-						Unit unit = (Instantiate(unitsPrefabs[i].gameObject, transform.position + spawnPosition, Quaternion.identity) as GameObject).GetComponent<Unit>();
-						unit.InitUnit(m);
-						m.TakeCoins(unit.price);
-						m.unidades.Add(unit);
+
+					GameObject unitObject = Instantiate (unitsPrefabs [i].gameObject, transform.position + spawnPosition, Quaternion.identity) as GameObject; 
+
+					Unit unit = (unitObject).GetComponent<Unit>();
+					unit.InitUnit (m);
+
+					Debug.Log ("coins: " + m.GetCoins());
+					Debug.Log ("preço: " + unit.price);
+					if (m.GetCoins () >= unit.price) {
+						m.TakeCoins (unit.price);
+						m.unidades.Add (unit);
+					} else {
+						Debug.Log ("Entrou...");
+						Destroy (unitObject);
+						Debug.Log ("Saiu...");
 					}
 				}
 			}

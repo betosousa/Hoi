@@ -30,6 +30,7 @@ public class GameController : MonoBehaviour {
 	}
 
 	void Start () {
+
 		cam = Camera.main.GetComponent<CameraFollow>();
 
 		// quando alguem clicar no 'end turn' chama 'ChangePlayer'
@@ -38,8 +39,6 @@ public class GameController : MonoBehaviour {
 		if(players != null){
 			ChangePlayer();
 		}
-
-
 	}
 
 	public void InitPlayers(GameObject m1, GameObject m2){

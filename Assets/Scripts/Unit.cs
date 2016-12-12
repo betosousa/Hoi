@@ -84,6 +84,7 @@ public class Unit : MonoBehaviour{
 	}
 
 	public void OnTriggerEnter(Collider other){
+		DisplayStats ();
 		Mark m = other.GetComponent<Mark>();
 		if(m != null){
 			if(!haveMoved){
@@ -93,12 +94,35 @@ public class Unit : MonoBehaviour{
 	}
 
 	public void OnTriggerExit(Collider other){
+		ClearStats ();
 		Mark m = other.GetComponent<Mark>();
 		if(m != null){
 			if(!haveMoved){
 				mark.OnTileSelect -= SelectedUnit;
 			}
 		}
+	}
+
+	void DisplayStats() {
+		GameObject.Find ("Side").GetComponent<Text>().text = lado;
+		GameObject.Find ("Health").GetComponent<Text>().text = "Health: " + health;
+		GameObject.Find ("Strength").GetComponent<Text>().text = "Strength: " + strength;
+		GameObject.Find ("Defense").GetComponent<Text>().text = "Defense: " + defense;
+		GameObject.Find ("Intelligence").GetComponent<Text>().text = "Intelligence: " + intelligence;
+		GameObject.Find ("Resistance").GetComponent<Text>().text = "Resistance: " + resistence;
+		GameObject.Find ("Speed").GetComponent<Text>().text = "Speed: " + speed;
+		GameObject.Find ("Range").GetComponent<Text>().text = "Range: " + range;
+	}
+
+	void ClearStats() {
+		GameObject.Find ("Side").GetComponent<Text>().text = "";
+		GameObject.Find ("Health").GetComponent<Text>().text = "";
+		GameObject.Find ("Strength").GetComponent<Text>().text = "";
+		GameObject.Find ("Defense").GetComponent<Text>().text = "";
+		GameObject.Find ("Intelligence").GetComponent<Text>().text = "";
+		GameObject.Find ("Resistance").GetComponent<Text>().text = "";
+		GameObject.Find ("Speed").GetComponent<Text>().text = "";
+		GameObject.Find ("Range").GetComponent<Text>().text = "";
 	}
 
 	void SelectedUnit(Vector3 position){

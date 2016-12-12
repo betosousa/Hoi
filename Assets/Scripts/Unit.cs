@@ -63,6 +63,7 @@ public class Unit : MonoBehaviour{
 	}
 
 	void EndTurn(){
+		ClearStats ();
 		map.UnDrawRange(transform.position, range);
 	}
 

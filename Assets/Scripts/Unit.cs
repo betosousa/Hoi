@@ -39,9 +39,14 @@ public class Unit : MonoBehaviour{
 	private Slider heathBar;
 	private Image barFill;
 
+	//Audio
+	private AudioSource source;
+	public AudioClip shootSound;
+
 	void Awake() {
 		map = GameObject.FindObjectOfType<TileMap>();
 		GameController.OnEndTurn += EndTurn;
+		source = GameObject.Find("blii").GetComponent<AudioSource>();
 	}
 
 	protected void SetSlider(){
@@ -187,11 +192,21 @@ public class Unit : MonoBehaviour{
 				if ( !enemy.mark.lado.Equals (mark.lado) ) {
 					enemy.TakeDamage( Dano (enemy));
 					int contra = Contragolpe (enemy);
+					source.Play();
+					//TODO: não ta pegando o outro "birl" no contragolpe
+					if (contra > 0) {
+						source.Stop ();
+						source.Play ();
+					}
 					TakeDamage(contra);
 					Debug.Log ( "atacou " );
 					Debug.Log ( Dano (enemy) );
 					Debug.Log ( "contragolpe " );
 					Debug.Log ( contra );
+					Debug.Log ("akiii");
+					Debug.Log (source);
+
+
 
 					// Verifica se morreu
 					if (enemy.health <= 0) {

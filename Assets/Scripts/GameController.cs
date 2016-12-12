@@ -16,6 +16,10 @@ public class GameController : MonoBehaviour {
 	public delegate void EndTurnAction();
 	public static event EndTurnAction OnEndTurn;
 
+	//Audio
+	private AudioSource source;
+	public AudioClip shootSound;
+
 	// Cria um botao pra passar o turno
 	void OnGUI(){
 		Mark mark = players[targetIndex].GetComponent<Mark>();
@@ -63,6 +67,7 @@ public class GameController : MonoBehaviour {
 			*/
 			targetIndex = (targetIndex + 1) % (players.Length);
 			mark = players[targetIndex].GetComponent<Mark>();
+			source = GameObject.Find("bodybuilder").GetComponent<AudioSource>();
 			Win (mark.lado);
 		} else {
 			mark.SetCoinsText(coinsText);
@@ -91,6 +96,7 @@ public class GameController : MonoBehaviour {
 	}
 
 	void Win(string side){
+		source.Play ();
 		StartCoroutine("EndGameText", side + WINS);
 	}
 

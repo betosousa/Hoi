@@ -3,10 +3,8 @@ using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class IntroController : MonoBehaviour {
-
 	// Use this for initialization
 	void Start () {
-	
 	}
 
 	void Update () {

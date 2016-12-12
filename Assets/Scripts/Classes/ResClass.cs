@@ -13,7 +13,7 @@ public class ResClass : Unit
 		resistence = 15;
 		speed = 5;
 		range = 25;
-		price = 1;
+		price = 20;
 		rangeAtk = 2;
 	}
 }

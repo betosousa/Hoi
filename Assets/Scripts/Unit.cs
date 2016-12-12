@@ -57,6 +57,8 @@ public class Unit : MonoBehaviour{
 
 	public void Die(){
 		GameController.OnEndTurn -= EndTurn;
+		mark.unidades.Remove (this);
+		Debug.Log ("DEAD");
 		Destroy(gameObject);
 	}
 

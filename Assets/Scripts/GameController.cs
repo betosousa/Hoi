@@ -29,7 +29,6 @@ public class GameController : MonoBehaviour {
 		}
 	}
 
-
 	void Start () {
 		cam = Camera.main.GetComponent<CameraFollow>();
 
@@ -56,8 +55,20 @@ public class GameController : MonoBehaviour {
 		cam.SetTarget(players[targetIndex]);
 
 		Mark mark = players[targetIndex].GetComponent<Mark>();
-		mark.SetCoinsText(coinsText);
-		StartCoroutine("InfoText", NEW_TURN + mark.lado);
+		Debug.Log (mark.lado + " coins: " + mark.GetCoins());
+		Debug.Log (mark.lado + " units: " + mark.unidades.Count);
+		if (mark.GetCoins () == 0 && mark.unidades.Count == 0) {
+			/*
+			 * Se o novo jogador não tem moedas e não tem mais
+			 * unidades para jogar, ele perde automaticamente.
+			*/
+			targetIndex = (targetIndex + 1) % (players.Length);
+			mark = players[targetIndex].GetComponent<Mark>();
+			Win (mark.lado);
+		} else {
+			mark.SetCoinsText(coinsText);
+			StartCoroutine("InfoText", NEW_TURN + mark.lado);
+		}
 	}
 
 	IEnumerator InfoText(string text){

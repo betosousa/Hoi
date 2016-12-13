@@ -16,6 +16,7 @@ public class Mark : MonoBehaviour {
 	public delegate void SelectEventHandler();
 	public delegate void MoveEventHandler(Vector3 position);
 	public event SelectEventHandler OnTowerSelect;
+	public event SelectEventHandler OnUnitSelect;
 	public event MoveEventHandler OnTileSelect;
 
 	void Start(){
@@ -82,5 +83,12 @@ public class Mark : MonoBehaviour {
 				OnTileSelect(transform.position);
 			}
 		}
+		if(Input.GetKeyDown(KeyCode.Z)){
+			if(OnUnitSelect!=null){
+				OnUnitSelect();
+			}
+				
+		}
+
 	}
 }

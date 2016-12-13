@@ -44,6 +44,7 @@ public class Unit : MonoBehaviour{
 	public AudioClip shootSound;
 
 	void Awake() {
+		
 		map = GameObject.FindObjectOfType<TileMap>();
 		GameController.OnEndTurn += EndTurn;
 		source = GameObject.Find("blii").GetComponent<AudioSource>();

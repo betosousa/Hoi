@@ -13,8 +13,14 @@ public class Tower : MonoBehaviour {
 	Image image;
 	GameController gc;
 
-	[SerializeField] private Unit[] unitsPrefabs;
-	[SerializeField] private Texture[] unitsImgs;
+	private Unit[] unitsPrefabs;
+	private Texture[] unitsImgs;
+
+	[SerializeField] private Unit[] snakePrefabs;
+	[SerializeField] private Texture[] snakeImgs;
+
+	[SerializeField] private Unit[] dragonPrefabs;
+	[SerializeField] private Texture[] dragonImgs;
 
 	void Start(){
 		GameController.OnEndTurn += CloseShop;
@@ -84,6 +90,15 @@ public class Tower : MonoBehaviour {
 
 	void OnGUI(){
 		if(selected){
+
+			if(m.lado.Equals("Dragon")){
+				unitsPrefabs = dragonPrefabs;
+				unitsImgs = dragonImgs;
+			}else{
+				unitsPrefabs = snakePrefabs;
+				unitsImgs = snakeImgs;
+			}
+				
 			for(int i = 0; i < unitsPrefabs.Length; i++){
 				Rect pos = new Rect(offset + i*(buttonWidth + offset), Screen.height - (buttonHeight + offset), buttonWidth, buttonHeight);
 

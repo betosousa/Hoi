@@ -12,8 +12,8 @@ public class ResClass : Unit
 		intelligence = 8;
 		resistence = 15;
 		speed = 5;
-		range = 25;
-		price = 20;
+		range = 8;
+		price = 5;
 		rangeAtk = 2;
 	}
 }

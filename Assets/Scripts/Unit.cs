@@ -143,10 +143,11 @@ public class Unit : MonoBehaviour{
 
 	public int Dano(Unit enemy)
 	{
-		if (strength > enemy.defense) {
-			return (strength - enemy.defense);
-		} else {
-			Debug.Log ("Defendeu");
+        return (strength - enemy.defense / 2);
+        if (strength > enemy.defense) {
+            Debug.Log("Defendeu");
+        } else {
+			
 			return 0;
 		}
 			

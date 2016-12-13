@@ -1,9 +1,10 @@
 fileFormatVersion: 2
 guid: 2b38facde17453a4f803ad13f61dbcf9
-timeCreated: 1480555150
+timeCreated: 1481603468
 licenseType: Free
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: monkey2_0
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -50,8 +51,19 @@ TextureImporter:
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
-    serializedVersion: 2
-    sprites: []
+    sprites:
+    - name: monkey2_0
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 96
+        width: 26
+        height: 27
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
     outline: []
   spritePackingTag: 
   userData: 

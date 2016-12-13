@@ -1,9 +1,10 @@
 fileFormatVersion: 2
 guid: 2e868a1f0559e1e4da27f76e8786de1d
-timeCreated: 1480555151
+timeCreated: 1481603538
 licenseType: Free
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: tiger2_0
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -50,8 +51,29 @@ TextureImporter:
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
-    serializedVersion: 2
-    sprites: []
+    sprites:
+    - name: tiger2_0
+      rect:
+        serializedVersion: 2
+        x: 62
+        y: 165
+        width: 44
+        height: 59
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 3, y: 29.5}
+        - {x: -7, y: 29.5}
+        - {x: -13, y: 22.5}
+        - {x: -14, y: 18.5}
+        - {x: -14, y: -23.5}
+        - {x: -13, y: -26.5}
+        - {x: 10, y: -26.5}
+        - {x: 12, y: -23.5}
+        - {x: 13, y: -14.5}
+        - {x: 13, y: 23.5}
+      tessellationDetail: 0
     outline: []
   spritePackingTag: 
   userData: 

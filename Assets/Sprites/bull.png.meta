@@ -1,9 +1,10 @@
 fileFormatVersion: 2
 guid: 9e9d346a82f93a747a51b5010f9966f2
-timeCreated: 1480555153
+timeCreated: 1481603436
 licenseType: Free
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: bull_0
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -50,8 +51,27 @@ TextureImporter:
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
-    serializedVersion: 2
-    sprites: []
+    sprites:
+    - name: bull_0
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 121
+        width: 37
+        height: 43
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -9.5, y: 19.5}
+        - {x: -14.5, y: 13.5}
+        - {x: -14.5, y: -9.5}
+        - {x: -11.5, y: -20.5}
+        - {x: 11.5, y: -20.5}
+        - {x: 15.5, y: -10.5}
+        - {x: 15.5, y: 15.5}
+        - {x: 14.5, y: 19.5}
+      tessellationDetail: 0
     outline: []
   spritePackingTag: 
   userData: 

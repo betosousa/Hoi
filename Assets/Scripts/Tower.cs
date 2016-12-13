@@ -4,6 +4,7 @@ using System.Collections;
 
 public class Tower : MonoBehaviour {
 
+	bool givecoins = false;
 	float buttonWidth = 50, buttonHeight = 50, offset = 30;
 	bool selected = false;
 	Vector3 spawnPosition = new Vector3(0,0,-0.3f);
@@ -17,10 +18,20 @@ public class Tower : MonoBehaviour {
 
 	void Start(){
 		GameController.OnEndTurn += CloseShop;
+		GameController.OnEndTurn += GiveCoin;
 		Image[] imgs = GetComponentsInChildren<Image>();
 		image = (imgs[0].name == "taken") ? imgs[0] : imgs[1]; 
 		SetImageColor();
 		gc = GameObject.FindObjectOfType<GameController>();		
+
+
+	}
+
+	void GiveCoin(){
+		if(m != null && givecoins){
+			m.ReceiveCoins(1);
+		}
+		givecoins = !givecoins;
 	}
 
 	void SetImageColor(){

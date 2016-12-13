@@ -70,7 +70,7 @@ public class TileMap : MonoBehaviour {
 	}
 
 	bool IsInMap(int x, int y){
-		return x>=0 && y>=0 && x<map.GetLength(0) && y<map.GetLength(1);
+		return x>=0 && y>=0 && x<map.GetLength(0) && y<map.GetLength(1) && !(x>=8 && x<=11 && y>=8 && y<=11);
 	}
 
 
@@ -86,7 +86,7 @@ public class TileMap : MonoBehaviour {
 
 	public bool IsInRange(Vector3 unitPosition, Vector3 tilePosition, int range){
 		int dx = (int) Mathf.Abs(unitPosition.x - tilePosition.x), dy = (int) Mathf.Abs(unitPosition.y - tilePosition.y);
-		return (dx+dy) <= range;
+		return ((dx+dy) <= range) && IsInMap((int) tilePosition.x, (int) tilePosition.y);
 	}
 
 	public void UnDrawRange(Vector3 position, int range){

@@ -91,12 +91,13 @@ public class Unit : MonoBehaviour{
 	}
 
 	public void OnTriggerEnter(Collider other){
-		DisplayStats ();
+		
 		Mark m = other.GetComponent<Mark>();
 		if(m != null){
 			if(!haveMoved){
 				mark.OnTileSelect += SelectedUnit;
 			}
+			mark.OnUnitSelect += DisplayStats;
 		}
 	}
 
@@ -107,6 +108,7 @@ public class Unit : MonoBehaviour{
 			if(!haveMoved){
 				mark.OnTileSelect -= SelectedUnit;
 			}
+			mark.OnUnitSelect -= DisplayStats;
 		}
 	}
 

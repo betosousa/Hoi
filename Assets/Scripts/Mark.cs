@@ -39,7 +39,9 @@ public class Mark : MonoBehaviour {
 
 	public void ReceiveCoins(int amount){
 		coins += amount;
-		coinText.text = COINS + coins;
+
+		if(coinText!=null)
+			coinText.text = COINS + coins;
 	}
 
 	void SetUnitsBools(bool havePlayed){

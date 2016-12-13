@@ -183,42 +183,46 @@ public class Unit : MonoBehaviour{
 
 	void Attack(Vector3 pos)
 	{
-		RaycastHit hit;
-		Ray ray = new Ray (pos, Vector3.back);
-		if (Physics.Raycast(ray, out hit, 1)) {
-			Unit enemy = hit.collider.GetComponent<Unit> ();
-			if (enemy != null ) {
-				// verifica se não estão do mesmo lado
-				if ( !enemy.mark.lado.Equals (mark.lado) ) {
-					enemy.TakeDamage( Dano (enemy));
-					int contra = Contragolpe (enemy);
-					source.Play();
-					//TODO: não ta pegando o outro "birl" no contragolpe
-					if (contra > 0) {
-						source.Stop ();
-						source.Play ();
-					}
-					TakeDamage(contra);
-					Debug.Log ( "atacou " );
-					Debug.Log ( Dano (enemy) );
-					Debug.Log ( "contragolpe " );
-					Debug.Log ( contra );
-					Debug.Log ("akiii");
-					Debug.Log (source);
+		if(map.IsInRange(transform.position, pos, rangeAtk)){
+			RaycastHit hit;
+			Ray ray = new Ray (pos, Vector3.back);
+			if (Physics.Raycast(ray, out hit, 1)) {
+				Unit enemy = hit.collider.GetComponent<Unit> ();
+				if (enemy != null ) {
+					// verifica se não estão do mesmo lado
+					if ( !enemy.mark.lado.Equals (mark.lado) ) {
+						enemy.TakeDamage( Dano (enemy));
+						int contra = Contragolpe (enemy);
+						source.Play();
+						//TODO: não ta pegando o outro "birl" no contragolpe
+						if (contra > 0) {
+							source.Stop ();
+							source.Play ();
+						}
+						TakeDamage(contra);
+						Debug.Log ( "atacou " );
+						Debug.Log ( Dano (enemy) );
+						Debug.Log ( "contragolpe " );
+						Debug.Log ( contra );
+						Debug.Log ("akiii");
+						Debug.Log (source);
 
 
 
-					// Verifica se morreu
-					if (enemy.health <= 0) {
-						enemy.Die();
+						// Verifica se morreu
+						if (enemy.health <= 0) {
+							enemy.Die();
+						}
 					}
 				}
-			}
-			mark.OnTileSelect -= Attack;
-			//desdesenhar range
-			haveMoved = true;
-			map.UnDrawRange(transform.position, rangeAtk);
 
+
+				mark.OnTileSelect -= Attack;
+				//desdesenhar range
+				haveMoved = true;
+				map.UnDrawRange(transform.position, rangeAtk);
+
+			}
 		}
 	}
 

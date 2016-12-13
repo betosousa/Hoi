@@ -20,6 +20,7 @@ public class TileMap : MonoBehaviour {
 
 
 	void Awake(){
+		Debug.Log("awake");
 		StreamReader f = new StreamReader(fileName);
 
 		mapWidth  = int.Parse(f.ReadLine());

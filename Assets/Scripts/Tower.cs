@@ -4,6 +4,7 @@ using System.Collections;
 
 public class Tower : MonoBehaviour {
 
+	bool givecoins = false;
 	float buttonWidth = 50, buttonHeight = 50, offset = 30;
 	bool selected = false;
 	Vector3 spawnPosition = new Vector3(0,0,-0.3f);
@@ -12,15 +13,31 @@ public class Tower : MonoBehaviour {
 	Image image;
 	GameController gc;
 
-	[SerializeField] private Unit[] unitsPrefabs;
-	[SerializeField] private Texture[] unitsImgs;
+	private Unit[] unitsPrefabs;
+	private Texture[] unitsImgs;
+
+	[SerializeField] private Unit[] snakePrefabs;
+	[SerializeField] private Texture[] snakeImgs;
+
+	[SerializeField] private Unit[] dragonPrefabs;
+	[SerializeField] private Texture[] dragonImgs;
 
 	void Start(){
 		GameController.OnEndTurn += CloseShop;
+		GameController.OnEndTurn += GiveCoin;
 		Image[] imgs = GetComponentsInChildren<Image>();
 		image = (imgs[0].name == "taken") ? imgs[0] : imgs[1]; 
 		SetImageColor();
 		gc = GameObject.FindObjectOfType<GameController>();		
+
+
+	}
+
+	void GiveCoin(){
+		if(m != null && givecoins){
+			m.ReceiveCoins(1);
+		}
+		givecoins = !givecoins;
 	}
 
 	void SetImageColor(){
@@ -73,6 +90,15 @@ public class Tower : MonoBehaviour {
 
 	void OnGUI(){
 		if(selected){
+
+			if(m.lado.Equals("Dragon")){
+				unitsPrefabs = dragonPrefabs;
+				unitsImgs = dragonImgs;
+			}else{
+				unitsPrefabs = snakePrefabs;
+				unitsImgs = snakeImgs;
+			}
+				
 			for(int i = 0; i < unitsPrefabs.Length; i++){
 				Rect pos = new Rect(offset + i*(buttonWidth + offset), Screen.height - (buttonHeight + offset), buttonWidth, buttonHeight);
 

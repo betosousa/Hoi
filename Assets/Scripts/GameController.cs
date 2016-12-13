@@ -36,6 +36,7 @@ public class GameController : MonoBehaviour {
 	void Start () {
 
 		cam = Camera.main.GetComponent<CameraFollow>();
+		source = GameObject.Find("bodybuilder").GetComponent<AudioSource>();
 
 		// quando alguem clicar no 'end turn' chama 'ChangePlayer'
 		OnEndTurn += ChangePlayer;
@@ -67,7 +68,6 @@ public class GameController : MonoBehaviour {
 			*/
 			targetIndex = (targetIndex + 1) % (players.Length);
 			mark = players[targetIndex].GetComponent<Mark>();
-			source = GameObject.Find("bodybuilder").GetComponent<AudioSource>();
 			Win (mark.lado);
 		} else {
 			mark.SetCoinsText(coinsText);
